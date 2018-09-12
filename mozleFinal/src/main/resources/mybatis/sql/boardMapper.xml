@@ -1,0 +1,86 @@
+<?xml version= "1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="boardMapper">
+	<resultMap type="Board" id="boardMap">
+		<id property="b_no" column="B_NO"/>
+		<result property="b_title" column="B_TITLE"/>
+		<result property="b_writer" column="B_WRITER"/>
+		<result property="b_pwd" column="B_PWD"/>
+		<result property="b_content" column="B_CONTENT"/>
+		<result property="b_date" column="B_DATE"/>
+		<result property="b_count" column="B_COUNT"/>
+		<result property="b_id" column="B_ID"/>
+	</resultMap>
+	<select id="boardCount" resultType="int">
+      SELECT COUNT(B_NO) FROM BOARD WHERE B_CLUBNAME IS NULL
+   </select>
+   
+   <select id="selectBoardList" resultType="Board">
+   SELECT B_NO, B_TITLE, B_WRITER, B_PWD, B_CONTENT, B_DATE, B_COUNT, B_ID FROM 
+   (SELECT CEIL(ROWNUM/10) AS NUM1, B_NO, B_TITLE, B_WRITER, B_PWD, B_CONTENT, B_DATE, B_COUNT, B_ID FROM 
+   (SELECT * FROM BOARD WHERE B_CLUBNAME IS NULL ORDER BY B_NO DESC) )WHERE NUM1 = #{no}
+   </select>   
+   
+   <update id="updateCount" parameterType="int">
+      UPDATE BOARD  
+      SET B_COUNT = B_COUNT + 1
+      WHERE B_NO = #{no}
+   </update>
+   
+  <select id="selectBoard" resultType="Board">
+      SELECT B_NO, B_TITLE, B_WRITER, B_PWD, B_CONTENT, B_DATE, B_COUNT, B_ID,B_CLUBNAME
+      FROM BOARD
+      WHERE B_NO = #{no}
+   </select>
+   
+   <insert id="insertBoard" parameterType="Board">
+   INSERT INTO BOARD
+   VALUES(SEQ_B_NO.NEXTVAL, #{b_title}, #{b_writer}, #{b_pwd}, #{b_content}, SYSDATE, 0, #{b_id}, null)
+   </insert>
+
+   <update id="updateBoard" parameterType="Board">
+   UPDATE BOARD
+   SET B_NO = #{b_no}, B_TITLE = #{b_title}, B_WRITER = #{b_writer}, B_PWD = #{b_pwd}, B_CONTENT=#{b_content}, 
+   B_DATE=SYSDATE, B_COUNT=#{b_count}
+   WHERE B_NO = #{b_no}
+   </update>
+   
+   <delete id="deleteBoard" parameterType="int">
+   DELETE FROM BOARD 
+   WHERE B_NO = #{no}
+   </delete>
+   
+	
+<!-- 	제각이만든곳 -->
+	<select id="boardCountCname" resultType="int" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+		SELECT COUNT(*) FROM BOARD
+		WHERE B_CLUBNAME=#{c_name}
+	</select>
+	<select id="selectBoardListCname" resultType="Board" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+	    SELECT * FROM BOARD
+	     WHERE B_CLUBNAME=#{c_name}
+	</select>	
+		<insert id="insertClubBoard" parameterType="Board">
+	INSERT INTO BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_CLUBNAME)
+	VALUES(SEQ_B_NO.NEXTVAL, #{b_title}, #{b_writer}, #{b_pwd}, #{b_content}, SYSDATE, 0, #{b_clubname})
+	</insert>
+	
+	<!-- 보람 : 내가 쓴 글 목록 조회 -->
+	<select id="selectPost" parameterType="Member" resultMap="boardMap">
+	SELECT B_TITLE, B_DATE, B_NO, B_COUNT, 
+	(SELECT COUNT(*) FROM BOARDREPLY R WHERE B.B_NO=R.B_FONO) AS B_REPLYCNT
+	FROM BOARD B
+	WHERE B_WRITER =#{m_id} AND B_CLUBNAME IS NULL
+	</select>
+	
+	<select id="selectCPost" parameterType="Member" resultMap="boardMap">
+	SELECT B_TITLE, B_DATE, B_NO, B_COUNT, B_CLUBNAME,
+	(SELECT COUNT(*) FROM BOARDREPLY R WHERE B.B_NO=R.B_FONO) AS B_REPLYCNT
+	FROM BOARD B
+	WHERE B_WRITER =#{m_id} AND B_CLUBNAME IS NOT NULL
+	</select>
+</mapper>
+
+

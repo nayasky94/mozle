@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReasonMapper">
+
+<resultMap type="Reason" id ="resultReason">
+	<id property="l_id" column="L_ID"/>
+	<result property="l_reason" column="L_REASON"/>
+	<result property="l_detailreason" column="L_DETAILREASON"/>
+
+</resultMap>
+
+  
+  <insert id="insertReason" parameterType="Reason">
+  	INSERT INTO LEAVE_REASON VALUES(#{l_id},#{l_reason},#{l_detailreason})
+  </insert>
+  
+</mapper>

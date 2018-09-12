@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="MatchMapper">
+	<resultMap type="Match" id ="resultMatch">
+		<id property="matchCode" column="MATCH_CODE"/>
+		<result property="homeCode" column="HOME_CODE"/>
+		<result property="awayCode" column="AWAY_CODE"/>
+		<result property="area" column="AREA"/>
+		<result property="field" column="FIELD"/>
+		<result property="pay" column="PAY"/>
+		<result property="uColor" column="UNIFORM_COLOR"/>
+		<result property="content" column="CONTENT"/>
+		<result property="wDate" column="WRITE_DATE"/>
+		<result property="game" column="GAME_TYPE"/>
+		<result property="gDate" column="GAME_DATE"/>
+		<result property="gTime" column="GAME_TIME"/>
+		<result property="hName" column="HOME_NAME"/>
+		<result property="aName" column="AWAY_NAME"/>
+		<result property="m_id" column="HOME_ID"/>
+		<result property="jibun" column="JIBUN"/>
+		<result property="year" column="YEAR"/>
+		<result property="month" column="MONTH"/>
+		<result property="day" column="DAY"/>
+		<result property="subdate" column="SUBDATE"/>
+	</resultMap>
+
+
+<resultMap type="MatchApply" id ="resultApply">
+		<id property="matchCode" column="MATCH_CODE"/>
+		<result property="awayCode" column="AWAY_CODE"/>
+		<result property="choice" column="CHOICE"/>
+		<result property="aName" column="C_NAME"/>
+	</resultMap>
+	<resultMap type="MatchReply" id ="resultReply">
+		<id property="rCode" column="R_CODE"/>
+		<result property="matchCode" column="MATCH_CODE"/>
+		<result property="m_id" column="M_ID"/>
+		<result property="rContent" column="R_CONTENT"/>
+		<result property="rDate" column="R_DATE"/>
+	</resultMap>
+	<resultMap type="ClubMain" id="resultClubMain">
+		<id property="c_no" column="C_NO"/>
+		<result property="c_name" column="C_NAME"/>
+		<result property="c_category" column="C_CATEGORY"/>
+		<result property="c_leader_id" column="C_LEADER_ID"/>
+		<result property="c_member_id" column="C_MEMBER_ID"/>
+	</resultMap>
+	
+	<insert id="writeMatch" parameterType="Match">
+		INSERT INTO MATCH(MATCH_CODE, HOME_CODE, AREA,FIELD, PAY, UNIFORM_COLOR, CONTENT, WRITE_DATE, GAME_TYPE, GAME_DATE,GAME_TIME,HOME_ID,JIBUN)
+		VALUES('M'||SEQ_MATCH_CODE.NEXTVAL,#{homeCode},#{area},#{field}, #{pay}, #{uColor},#{content},SYSDATE,#{game},#{gDate},#{gTime},#{m_id},#{jibun})
+	</insert>
+	<select id="selectMatchList" parameterType="Match" resultMap="resultMatch">
+		SELECT MATCH_CODE, HOME_CODE, AWAY_CODE, AREA, SUBSTR(FIELD,0,12)||'...' AS FIELD, PAY, UNIFORM_COLOR, CONTENT, WRITE_DATE, GAME_TYPE, GAME_DATE, GAME_TIME ,HOME_ID,C.C_NAME AS HOME_NAME,JIBUN
+		FROM MATCH M
+		JOIN CLUB_MAIN C ON (M.HOME_CODE = C.C_NO)
+		WHERE GAME_TYPE=#{game} AND GAME_DATE LIKE '%'||#{gDate}||'%' AND DELFLAG = 'N'
+	</select>
+	<select id="selectMatch" parameterType="Match" resultMap="resultMatch">
+		<choose>
+			<when test="awayCode == 0">
+				SELECT MATCH_CODE, HOME_CODE, AWAY_CODE, AREA, FIELD, PAY, UNIFORM_COLOR, CONTENT, WRITE_DATE, GAME_TYPE, GAME_DATE, GAME_TIME ,HOME_ID,C.C_NAME AS HOME_NAME,SYSDATE-GAME_DATE AS SUBDATE,JIBUN
+				FROM MATCH M
+				JOIN CLUB_MAIN C ON (M.HOME_CODE = C.C_NO)
+				WHERE MATCH_CODE = #{matchCode}
+			</when>
+			<otherwise>
+				SELECT MATCH_CODE, HOME_CODE, AWAY_CODE, AREA, FIELD, PAY, UNIFORM_COLOR, CONTENT, WRITE_DATE, GAME_TYPE, GAME_DATE, GAME_TIME ,HOME_ID,C.C_NAME AS HOME_NAME ,C2.C_NAME AS AWAY_NAME,SYSDATE-GAME_DATE AS SUBDATE,JIBUN
+				FROM MATCH M
+				JOIN CLUB_MAIN C ON (M.HOME_CODE = C.C_NO)
+				JOIN CLUB_MAIN C2 ON (M.AWAY_CODE = C2.C_NO)
+				WHERE MATCH_CODE = #{matchCode}
+			</otherwise>
+		</choose>
+	</select>
+	<select id="selectApply" parameterType="String" resultMap="resultApply">
+		SELECT MATCH_CODE, AWAY_CODE, CHOICE ,C.C_NAME
+		FROM MATCH_APPLY M
+		JOIN CLUB_MAIN C ON (M.AWAY_CODE = C.C_NO)   
+		WHERE MATCH_CODE = #{matchCode} 
+	</select>
+	<select id="selectApply2" parameterType="Integer" resultMap="resultApply">
+		SELECT MATCH_CODE, AWAY_CODE, CHOICE
+		FROM MATCH_APPLY
+		WHERE AWAY_CODE = #{awayCode} 
+	</select>
+	<select id="selectApply3" parameterType="MatchApply" resultMap="resultApply">
+		SELECT MATCH_CODE, AWAY_CODE, CHOICE
+		FROM MATCH_APPLY
+		WHERE AWAY_CODE = #{awayCode} AND MATCH_CODE = #{matchCode}
+	</select>
+	<update id="updateAwayCode" parameterType="MatchApply">
+		UPDATE MATCH
+		SET AWAY_CODE =  #{awayCode}
+		WHERE MATCH_CODE = #{matchCode}
+	</update>
+	<insert id="insertMatchReply" parameterType="MatchReply">
+		INSERT INTO MATCH_REPLY(R_CODE, MATCH_CODE, M_ID, R_CONTENT, R_DATE)
+		VALUES ('R'||SEQ_R_CODE.NEXTVAL,#{matchCode},#{m_id},#{rContent},SYSDATE)
+	</insert>
+	<select id="selectMatchReply" parameterType="String" resultMap="resultReply">
+		SELECT R_CODE, MATCH_CODE, M_ID, R_CONTENT,TO_CHAR(R_DATE,'YYYY/MM/DD HH24:MI') AS R_DATE
+		FROM MATCH_REPLY
+		WHERE MATCH_CODE = #{matchCode} AND DELFALG='N'
+	</select>
+	<insert id="insertAwayCode" parameterType="MatchApply">
+		INSERT INTO MATCH_APPLY(MATCH_CODE, AWAY_CODE)
+		VALUES(#{matchCode},#{awayCode})
+	</insert>
+	<select id="selectLeaderId" resultMap="resultClubMain" parameterType="Member">
+		SELECT C_NO, C_NAME, C_CATEGORY, C_LEADER_ID, C_MEMBER_ID
+		FROM CLUB_MAIN
+		WHERE C_LEADER_ID = #{m_id}
+	</select>
+	<update id="deleteMatch" parameterType="Match">
+		UPDATE MATCH
+		SET DELFLAG = 'Y'
+		WHERE MATCH_CODE = #{matchCode}
+	</update>
+	<update id="updateMatch" parameterType="Match">
+		UPDATE MATCH
+		SET AREA=#{area},FIELD=#{field},PAY=#{pay},UNIFORM_COLOR=#{uColor},CONTENT=#{content},GAME_TYPE=#{game},GAME_DATE=#{gDate},GAME_TIME=#{gTime},JIBUN=#{jibun}
+		WHERE MATCH_CODE=#{matchCode}
+	</update>
+	<select id="selectGameDate" resultMap="resultMatch">
+		
+		<if test="game == null">
+			SELECT GAME_DATE,20||SUBSTR(TO_CHAR(GAME_DATE),0,INSTR(GAME_DATE,'/')-1) AS YEAR,SUBSTR(TO_CHAR(GAME_DATE),INSTR(GAME_DATE,'/')+1 ,INSTR(GAME_DATE,'/')-1) AS MONTH,TO_NUMBER(SUBSTR(SUBSTR(TO_CHAR(GAME_DATE),INSTR(GAME_DATE,'/')+1),INSTR(GAME_DATE,'/')+1)) AS DAY
+			FROM(SELECT MATCH_CODE, HOME_CODE, AWAY_CODE, AREA, FIELD, PAY, UNIFORM_COLOR, CONTENT, WRITE_DATE, GAME_TYPE, GAME_DATE, GAME_TIME, HOME_ID, DELFLAG
+		     	 FROM MATCH
+		     	 WHERE DELFLAG = 'N')
+			GROUP BY GAME_DATE		
+		</if>
+		<if test="game != null">
+			SELECT GAME_DATE,20||SUBSTR(TO_CHAR(GAME_DATE),0,INSTR(GAME_DATE,'/')-1) AS YEAR,SUBSTR(TO_CHAR(GAME_DATE),INSTR(GAME_DATE,'/')+1 ,INSTR(GAME_DATE,'/')-1) AS MONTH,TO_NUMBER(SUBSTR(SUBSTR(TO_CHAR(GAME_DATE),INSTR(GAME_DATE,'/')+1),INSTR(GAME_DATE,'/')+1)) AS DAY
+			FROM(SELECT MATCH_CODE, HOME_CODE, AWAY_CODE, AREA, FIELD, PAY, UNIFORM_COLOR, CONTENT, WRITE_DATE, GAME_TYPE, GAME_DATE, GAME_TIME, HOME_ID, DELFLAG
+		     	 FROM MATCH
+		      	 WHERE DELFLAG = 'N')
+			WHERE GAME_TYPE = #{game}
+			GROUP BY GAME_DATE
+		</if>
+	</select>
+	<update id="updateMReply" parameterType="MatchReply">
+		UPDATE MATCH_REPLY
+		SET R_CONTENT = #{rContent}
+		WHERE R_CODE = #{rCode} 
+	</update>
+	<update id="mReplyDelete" parameterType="MatchReply">
+		UPDATE MATCH_REPLY
+		SET DELFALG = 'Y' 
+		WHERE R_CODE = #{rCode} 
+	</update>
+  
+  
+  
+  <select id="selectMPost" parameterType="Member" resultMap="resultMatch">
+  	select CONTENT, WRITE_DATE
+  	from match 
+  	where HOME_ID=#{m_id}
+  </select>
+<!--  내가 속한 동호회가 경기 글을 올렸을때 경기 일정 가져옥 -->
+  <select id="selectMatchCalendar" parameterType="Member" resultMap="resultMatch">
+   
+   SELECT AREA,FIELD, PAY, GAME_DATE, GAME_TIME,
+   (SELECT DISTINCT CM.C_NAME
+      FROM MATCH M JOIN CLUB_MAIN CM ON  
+    (M.HOME_CODE = CM.C_NO)
+    WHERE MA.HOME_CODE = C_NO) AS HOME_NAME,
+    (SELECT CM.C_NAME
+    FROM MATCH M JOIN CLUB_MAIN CM ON  
+    (M.AWAY_CODE = CM.C_NO) 
+    WHERE MA.AWAY_CODE = C_NO) AS AWAY_NAME 
+    FROM MATCH MA 
+    WHERE (HOME_CODE IN( SELECT DISTINCT C_NO 
+    FROM ( SELECT REGEXP_SUBSTR(C_MEMBER_ID,'[^,]+', 1, LEVEL) AS MEMBER_ID, C_NAME,C_NO FROM CLUB_MAIN
+    JOIN MEMBER M ON (M.M_ID = #{m_id})
+   CONNECT BY REGEXP_SUBSTR(C_MEMBER_ID, '[^,]+', 1, LEVEL) IS NOT NULL)
+   WHERE MEMBER_ID =#{m_id}) 
+   OR AWAY_CODE IN ( SELECT DISTINCT C_NO 
+    FROM ( SELECT REGEXP_SUBSTR(C_MEMBER_ID,'[^,]+', 1, LEVEL) AS MEMBER_ID, C_NAME,C_NO FROM CLUB_MAIN
+    JOIN MEMBER M ON (M.M_ID =#{m_id})
+   CONNECT BY REGEXP_SUBSTR(C_MEMBER_ID, '[^,]+', 1, LEVEL) IS NOT NULL)
+   WHERE MEMBER_ID =#{m_id}))
+   AND GAME_DATE >= TO_CHAR(SYSDATE,'YYYY-MM-DD')
+   ORDER BY GAME_DATE ASC
+  </select>
+</mapper>

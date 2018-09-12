@@ -1,0 +1,68 @@
+<?xml version= "1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="noticeMapper">
+	<resultMap type="Notice" id="noticeMap">
+		<id property="n_no" column="N_NO"/>
+		<result property="n_title" column="N_TITLE"/>
+		<result property="n_writer" column="N_WRITER"/>
+		<result property="n_pwd" column="N_PWD"/>
+		<result property="n_content" column="N_CONTENT"/>
+		<result property="n_date" column="N_DATE"/>
+		<result property="n_count" column="N_COUNT"/>
+	</resultMap>
+	
+	<select id="noticePaging" resultType="Notice">
+		SELECT * FROM 
+		(SELECT CEIL(ROWNUM/10) AS NUM1, N_NO, N_TITLE, N_WRITER, N_PWD, N_CONTENT, N_DATE, N_COUNT FROM 
+		(SELECT * FROM NOTICE ORDER BY N_NO DESC) )WHERE NUM1 =#{no}
+	</select>
+	
+	<select id="noticeTotalCount" resultType="int">
+		SELECT COUNT(*) FROM NOTICE
+	</select>
+	
+	<select id="selectNoticeList" resultType="Notice">
+		SELECT * FROM 
+		(SELECT * FROM NOTICE ORDER BY N_NO DESC)
+		WHERE ROWNUM >=1 AND ROWNUM <![CDATA[ < ]]>=10
+	</select>
+	
+<!-- 	<select id="selectNoticeList" resultType="Notice"> -->
+<!-- 		SELECT N_NO, N_TITLE, N_WRITER, N_PWD, N_CONTENT, N_DATE, N_COUNT -->
+<!-- 		FROM NOTICE -->
+<!-- 		WHERE ROWNUM >=1 AND ROWNUM <=10 -->
+<!-- 		ORDER BY N_NO DESC -->
+<!-- 	</select> -->
+	
+	<select id="selectNotice" resultType="Notice">
+		SELECT N_NO, N_TITLE, N_WRITER, N_PWD, N_CONTENT, N_DATE, N_COUNT
+		FROM NOTICE
+		WHERE N_NO = #{no}
+	</select>
+	
+	<update id="noticeCount" parameterType="int">
+		UPDATE NOTICE 
+		SET N_COUNT = N_COUNT + 1
+		WHERE N_NO = #{no}
+	</update>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE 
+		VALUES(SEQ_N_NO.NEXTVAL, #{n_title}, #{n_writer}, #{n_pwd}, #{n_content}, SYSDATE, 0)
+	</insert>
+	
+	
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE 
+		SET N_NO = #{n_no}, N_TITLE = #{n_title}, N_PWD = #{n_pwd}, N_CONTENT = #{n_content}, N_DATE = SYSDATE
+		WHERE N_NO = #{n_no}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="Notice">
+		DELETE FROM NOTICE WHERE N_NO = #{no}
+	</delete>
+	
+	
+</mapper>

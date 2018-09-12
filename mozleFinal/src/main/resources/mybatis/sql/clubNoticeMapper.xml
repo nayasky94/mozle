@@ -1,0 +1,67 @@
+<?xml version= "1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ClubnoticeMapper">
+
+
+	
+	<select id="noticePaging" resultType="com.kh.mozle.clubNotice.model.vo.ClubNotice" parameterType="com.kh.mozle.clubNotice.model.vo.ClubNotice">
+		SELECT * FROM 
+		(SELECT CEIL(ROWNUM/10) AS NUM1, N_NO,N_ClUBNAME, N_TITLE, N_WRITER, N_PWD, N_CONTENT, N_DATE, N_COUNT FROM 
+		(SELECT * FROM CLUB_NOTICE WHERE N_CLUBNAME=#{n_clubname} ORDER BY N_NO DESC) )WHERE NUM1 =#{n_no}
+	</select>
+	
+	<select id="noticeTotalCount" resultType="int" parameterType="com.kh.mozle.clubNotice.model.vo.ClubNotice">
+		SELECT COUNT(*) FROM CLUB_NOTICE
+		WHERE N_CLUBNAME=#{n_clubname}
+	
+	</select>
+	
+	<select id="selectNoticeList" resultType="Notice">
+		SELECT * FROM 
+		(SELECT * FROM NOTICE ORDER BY N_NO DESC)
+		WHERE ROWNUM >=1 AND ROWNUM <![CDATA[ < ]]>=10
+	</select>
+	
+<!-- 	<select id="selectNoticeList" resultType="Notice"> -->
+<!-- 		SELECT N_NO, N_TITLE, N_WRITER, N_PWD, N_CONTENT, N_DATE, N_COUNT -->
+<!-- 		FROM NOTICE -->
+<!-- 		WHERE ROWNUM >=1 AND ROWNUM <=10 -->
+<!-- 		ORDER BY N_NO DESC -->
+<!-- 	</select> -->
+	
+	<select id="selectNotice" resultType="com.kh.mozle.clubNotice.model.vo.ClubNotice">
+		SELECT N_NO, N_CLUBNAME,N_TITLE, N_WRITER, N_PWD, N_CONTENT, N_DATE, N_COUNT
+		FROM CLUB_NOTICE
+		WHERE N_NO = #{no}
+	</select>
+	
+	<update id="noticeCount" parameterType="int">
+		UPDATE NOTICE 
+		SET N_COUNT = N_COUNT + 1
+		WHERE N_NO = #{no}
+	</update>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE 
+		VALUES(SEQ_N_NO.NEXTVAL, #{n_title}, #{n_writer}, #{n_pwd}, #{n_content}, SYSDATE, 0)
+	</insert>
+	
+	
+	<update id="updateNotice" parameterType="com.kh.mozle.clubNotice.model.vo.ClubNotice">
+		UPDATE CLUB_NOTICE 
+		SET N_NO = #{n_no}, N_CLUBNAME=#{n_clubname},N_TITLE = #{n_title}, N_PWD = #{n_pwd}, N_CONTENT = #{n_content}, N_DATE = SYSDATE
+		WHERE N_NO = #{n_no}
+	</update>
+	
+	<delete id="deleteNotice" parameterType="Notice">
+		DELETE FROM NOTICE WHERE N_NO = #{no}
+	</delete>
+	
+	<insert id="insertClubNotice" parameterType="com.kh.mozle.clubNotice.model.vo.ClubNotice">
+		INSERT INTO ClUB_NOTICE 
+		VALUES(SEQ_N_NO.NEXTVAL, #{n_clubname},#{n_title}, #{n_writer}, #{n_pwd}, #{n_content}, SYSDATE, 0)
+	</insert>
+	
+</mapper>

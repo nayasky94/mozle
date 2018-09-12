@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="clubMapper">
+
+		<resultMap type="ClubMain" id="clubMap">
+		<id property="c_no" column="C_NO"></id>
+		<result property="c_name" column="C_NAME" />
+		<result property="c_category" column="C_CATEGORY" />
+		<result property="c_leader_id" column="C_LEADER_ID" />
+		<result property="c_member_id" column="C_MEMBER_ID" />
+		<result property="c_picture" column="C_PICTURE" />
+		<result property="c_content" column="C_CONTENT" />
+		<result property="c_summary" column="C_SUMMARY" />
+		<result property="c_thumbnail" column="C_THUMBNAIL" />
+		<result property="c_location" column ="C_LOCATION"/>
+	</resultMap>
+
+<select id="selectClubList" resultType="com.kh.mozle.club.model.vo.ClubMain" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+ SELECT C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY
+  FROM CLUB_MAIN
+  WHERE C_CATEGORY=#{c_category}
+
+</select>
+
+
+<select id="selectClubDetail" resultType="com.kh.mozle.club.model.vo.ClubMain" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+ SELECT C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY
+  FROM CLUB_MAIN
+  WHERE C_NAME=#{c_name}
+</select>
+
+
+<select id="selectClubDetailList" resultType="com.kh.mozle.club.model.vo.ClubMain" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+ SELECT C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_MEMBER_ID_READY
+  FROM CLUB_MAIN
+  WHERE C_CATEGORY=#{c_category}
+
+</select>
+
+	  <insert id="insertClub" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+	  Insert into CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION) 
+	  values (SEQ_C_NO.NEXTVAL,#{c_name},#{c_category},#{c_leader_id},#{c_member_id},#{c_picture},#{c_content},#{c_summary},#{c_thumbnail},#{c_location})
+	  
+	  </insert>
+
+<select id="selectClubCnameLeaderId" resultType="com.kh.mozle.club.model.vo.ClubMain" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+  SELECT C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_MEMBER_ID_READY
+  FROM CLUB_MAIN
+  WHERE C_NAME=#{c_name} AND C_LEADER_ID=#{c_leader_id}
+
+</select>
+<update id="updateClubMain" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+UPDATE CLUB_MAIN
+SET C_CATEGORY=#{c_category},C_PICTURE=#{c_picture},
+C_CONTENT=#{c_content},C_SUMMARY=#{c_summary},C_THUMBNAIL=#{c_thumbnail}
+WHERE C_NO=#{c_no}
+</update>
+
+<update id="insertMemberId" parameterType="com.kh.mozle.club.model.vo.ClubMain">
+UPDATE CLUB_MAIN
+SET C_MEMBER_ID_READY=#{c_member_id_ready}
+WHERE C_NO=#{c_no}
+</update>
+
+<update id="insertMemberIdManage" parameterType="com.kh.mozle.club.model.vo.ClubMain" >
+UPDATE CLUB_MAIN
+SET C_MEMBER_ID_READY=#{c_member_id_ready},C_MEMBER_ID=#{c_member_id}
+WHERE C_NO=#{c_no}
+</update>
+  
+
+
+	  <select id="joinedClubList" resultType="ClubMain" parameterType="Member">
+	 	SELECT CM.C_NO,CM.C_NAME,CM.C_CATEGORY,CM.C_LEADER_ID,CM.C_MEMBER_ID,CM.C_PICTURE,CM.C_CONTENT,CM.C_SUMMARY,CM.C_THUMBNAIL 
+		FROM CLUB_MAIN CM
+		JOIN MEMBER M ON (INSTR(cm.C_MEMBER_ID,m.m_id)!= 0)
+		WHERE M.M_ID =#{m_id}
+	  </select>
+
+	  <select id="createdClubList" resultType="ClubMain" parameterType="Member">
+	  	SELECT C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL 
+	  	FROM CLUB_MAIN 
+	 	WHERE C_LEADER_ID =#{m_id}
+	  </select>
+	
+  
+		<select id="selectInterest" resultType="ClubMain" parameterType="Member">
+			SELECT CM.C_NAME, CM.C_SUMMARY, CM.C_THUMBNAIL, CM.C_LOCATION
+			FROM CLUB_MAIN CM
+			JOIN MEMBER M ON (INSTR(M.M_TOPIC, CM.C_CATEGORY) != 0)
+			WHERE M.M_ID = #{m_id}
+		</select>
+
+  		<select id="selectNewClub" resultType="ClubMain">
+  			SELECT C_NAME, C_SUMMARY, C_THUMBNAIL, C_LOCATION
+  		 	FROM CLUB_MAIN
+  		 	ORDER BY C_NO DESC
+  		</select>
+
+  
+</mapper>

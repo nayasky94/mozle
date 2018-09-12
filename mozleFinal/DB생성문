@@ -1,0 +1,580 @@
+DROP SEQUENCE "MOZLE"."SEQ_B_NO";
+DROP SEQUENCE "MOZLE"."SEQ_B_RENO";
+DROP SEQUENCE "MOZLE"."SEQ_C_NO";
+DROP SEQUENCE "MOZLE"."SEQ_MATCH_CODE";
+DROP SEQUENCE "MOZLE"."SEQ_M_NO";
+DROP SEQUENCE "MOZLE"."SEQ_N_NO";
+DROP SEQUENCE "MOZLE"."SEQ_R_CODE";
+DROP TABLE "MOZLE"."ADMIN" cascade constraints;
+DROP TABLE "MOZLE"."BOARD" cascade constraints;
+DROP TABLE "MOZLE"."BOARDREPLY" cascade constraints;
+DROP TABLE "MOZLE"."CLUB_MAIN" cascade constraints;
+DROP TABLE "MOZLE"."CLUB_NOTICE" cascade constraints;
+DROP TABLE "MOZLE"."LEAVE_REASON" cascade constraints;
+DROP TABLE "MOZLE"."MATCH" cascade constraints;
+DROP TABLE "MOZLE"."MATCH_APPLY" cascade constraints;
+DROP TABLE "MOZLE"."MATCH_REPLY" cascade constraints;
+DROP TABLE "MOZLE"."MEMBER" cascade constraints;
+DROP TABLE "MOZLE"."NOTICE" cascade constraints;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_B_NO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_B_NO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 141 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_B_RENO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_B_RENO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 81 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_C_NO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_C_NO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 121 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_MATCH_CODE
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_MATCH_CODE"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 148 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_M_NO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_M_NO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 146 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_N_NO
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_N_NO"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 61 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Sequence SEQ_R_CODE
+--------------------------------------------------------
+
+   CREATE SEQUENCE  "MOZLE"."SEQ_R_CODE"  MINVALUE 1 MAXVALUE 9999999999999999999999999999 INCREMENT BY 1 START WITH 141 CACHE 20 NOORDER  NOCYCLE ;
+--------------------------------------------------------
+--  DDL for Table ADMIN
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."ADMIN" 
+   (	"NUMKEY" NUMBER, 
+	"COUNTVISITOR" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table BOARD
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."BOARD" 
+   (	"B_NO" NUMBER, 
+	"B_TITLE" VARCHAR2(200 BYTE), 
+	"B_WRITER" VARCHAR2(30 BYTE), 
+	"B_PWD" VARCHAR2(50 BYTE), 
+	"B_CONTENT" VARCHAR2(1000 BYTE), 
+	"B_DATE" DATE, 
+	"B_COUNT" NUMBER, 
+	"B_ID" VARCHAR2(30 BYTE), 
+	"B_CLUBNAME" VARCHAR2(2000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table BOARDREPLY
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."BOARDREPLY" 
+   (	"B_FONO" NUMBER, 
+	"B_RENO" NUMBER, 
+	"B_REWRITER" VARCHAR2(30 BYTE), 
+	"B_RECONTENT" VARCHAR2(1000 BYTE), 
+	"B_REDATE" DATE
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table CLUB_MAIN
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."CLUB_MAIN" 
+   (	"C_NO" NUMBER, 
+	"C_NAME" VARCHAR2(50 BYTE), 
+	"C_CATEGORY" VARCHAR2(100 BYTE), 
+	"C_LEADER_ID" VARCHAR2(30 BYTE), 
+	"C_MEMBER_ID" VARCHAR2(1000 BYTE), 
+	"C_PICTURE" VARCHAR2(1000 BYTE), 
+	"C_CONTENT" VARCHAR2(1000 BYTE), 
+	"C_SUMMARY" VARCHAR2(1000 BYTE), 
+	"C_THUMBNAIL" VARCHAR2(1000 BYTE), 
+	"C_LOCATION" VARCHAR2(1000 BYTE), 
+	"C_MEMBER_ID_READY" VARCHAR2(2000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table CLUB_NOTICE
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."CLUB_NOTICE" 
+   (	"N_NO" NUMBER, 
+	"N_CLUBNAME" VARCHAR2(200 BYTE), 
+	"N_TITLE" VARCHAR2(200 BYTE), 
+	"N_WRITER" VARCHAR2(30 BYTE), 
+	"N_PWD" VARCHAR2(50 BYTE), 
+	"N_CONTENT" VARCHAR2(1000 BYTE), 
+	"N_DATE" DATE, 
+	"N_COUNT" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table LEAVE_REASON
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."LEAVE_REASON" 
+   (	"L_ID" VARCHAR2(30 BYTE), 
+	"L_REASON" NUMBER, 
+	"L_DETAILREASON" VARCHAR2(1000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MATCH
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."MATCH" 
+   (	"MATCH_CODE" VARCHAR2(10 BYTE), 
+	"HOME_CODE" NUMBER, 
+	"AWAY_CODE" NUMBER, 
+	"AREA" VARCHAR2(20 BYTE), 
+	"FIELD" VARCHAR2(100 BYTE), 
+	"PAY" NUMBER DEFAULT 0, 
+	"UNIFORM_COLOR" VARCHAR2(50 BYTE), 
+	"CONTENT" VARCHAR2(1000 BYTE), 
+	"WRITE_DATE" DATE DEFAULT SYSDATE, 
+	"GAME_TYPE" VARCHAR2(20 BYTE), 
+	"GAME_DATE" DATE, 
+	"GAME_TIME" VARCHAR2(10 BYTE), 
+	"HOME_ID" VARCHAR2(30 BYTE), 
+	"DELFLAG" CHAR(1 BYTE) DEFAULT 'N', 
+	"JIBUN" VARCHAR2(100 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MATCH_APPLY
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."MATCH_APPLY" 
+   (	"MATCH_CODE" VARCHAR2(10 BYTE), 
+	"AWAY_CODE" NUMBER, 
+	"CHOICE" CHAR(1 BYTE) DEFAULT 'N'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MATCH_REPLY
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."MATCH_REPLY" 
+   (	"R_CODE" VARCHAR2(10 BYTE), 
+	"MATCH_CODE" VARCHAR2(10 BYTE), 
+	"M_ID" VARCHAR2(30 BYTE), 
+	"R_CONTENT" VARCHAR2(1000 BYTE), 
+	"R_DATE" DATE DEFAULT SYSDATE, 
+	"DELFALG" CHAR(1 BYTE) DEFAULT 'N'
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Table MEMBER
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."MEMBER" 
+   (	"M_NO" NUMBER, 
+	"M_ID" VARCHAR2(30 BYTE), 
+	"M_PWD" VARCHAR2(100 BYTE), 
+	"M_NAME" VARCHAR2(30 BYTE), 
+	"M_GENDER" CHAR(1 BYTE), 
+	"M_BIRTH" VARCHAR2(10 BYTE), 
+	"M_PHONE" VARCHAR2(15 BYTE), 
+	"M_EMAIL" VARCHAR2(30 BYTE), 
+	"M_ADDRESS" VARCHAR2(500 BYTE), 
+	"M_CNAME" VARCHAR2(500 BYTE), 
+	"M_GRADE" NUMBER, 
+	"M_CGRADE" NUMBER DEFAULT 0, 
+	"M_LOCATION" VARCHAR2(2000 BYTE), 
+	"M_TOPIC" VARCHAR2(2000 BYTE)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+
+   COMMENT ON COLUMN "MOZLE"."MEMBER"."M_CNAME" IS '소속된 동호회이름';
+   COMMENT ON COLUMN "MOZLE"."MEMBER"."M_GRADE" IS '회원 등급 0:관리자 1:일반회원';
+   COMMENT ON COLUMN "MOZLE"."MEMBER"."M_CGRADE" IS '동호회 내 등급 0:동호회 x 1:동호회회원 2: 동호회장';
+--------------------------------------------------------
+--  DDL for Table NOTICE
+--------------------------------------------------------
+
+  CREATE TABLE "MOZLE"."NOTICE" 
+   (	"N_NO" NUMBER, 
+	"N_TITLE" VARCHAR2(200 BYTE), 
+	"N_WRITER" VARCHAR2(30 BYTE), 
+	"N_PWD" VARCHAR2(50 BYTE), 
+	"N_CONTENT" VARCHAR2(1000 BYTE), 
+	"N_DATE" DATE, 
+	"N_COUNT" NUMBER
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+REM INSERTING into MOZLE.ADMIN
+SET DEFINE OFF;
+Insert into MOZLE.ADMIN (NUMKEY,COUNTVISITOR) values (1,4096);
+REM INSERTING into MOZLE.BOARD
+SET DEFINE OFF;
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (88,'저희는 축구 동호회 2번입니다.','test2','1234','<p><b>저희는 축구 동호회 2번입니다.</b></p><div><br></div>',to_date('','RR/MM/DD'),0,null,'SoccerTest2');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (89,'저희는 축구 동호회 3번입니다.','test3','asdas','<p><b>저희는 축구 동호회 3번입니다.</b></p><div><br></div>',to_date('','RR/MM/DD'),0,null,'SoccerTest3');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (90,'저희는 축구 동호회 7번입니다.','test7','1234','<p><b>저희는 축구 동호회 7번입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'SoccerTest7');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (91,'저희는 축구 동호회 6번입니다.','test6','1234','<p><b>저희는 축구 동호회 6번입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'SoccerTest6');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (92,'저희는 축구 동호회 5번입니다.','test5','1234','<p><b>저희는 축구 동호회 5번입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'SoccerTest5');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (93,'저희는 축구 동호회 4번입니다.','test4','1234','<p><b>저희는 축구 동호회 4번입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'SoccerTest4');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (94,'기타 동호회입니다.','test12','1234','<p><b>기타 동호회입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'guitar');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (95,'피아노 동호회입니다.','test11','1234','<p><b>피아노 동호회입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'pianoClub1');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (96,'보컬 동호회입니다.','test10','1234','<p><b>보컬 동호회입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'vocal1');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (97,'jasuClub입니다.','test13','1234','<p><b>jasuClub입니다.</b></p>',to_date('','RR/MM/DD'),0,null,'jasuClub');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (98,'캘리그라피 동호회입니다.','test14','1234','<p>캘리그라피 동호회입니다.</p>',to_date('','RR/MM/DD'),0,null,'calliClub1');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (99,'소품공예입니다.','test15','1234','<p>소품공예입니다.</p>',to_date('','RR/MM/DD'),0,null,'draft1');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (101,'dogClub입니다.','test17','1234','<p>dogClub입니다.</p>',to_date('','RR/MM/DD'),0,null,'dogClub');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (102,'우리 같이 다트하고 놀아요!','test18','1234','<p>우리 같이 다트하고 놀아요!</p>',to_date('','RR/MM/DD'),0,null,'dartClub');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (103,'나랑 배그 할 사람!','test19','1234','<p>나랑 배그 할 사람!</p>',to_date('','RR/MM/DD'),0,null,'battlegroundClub');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (87,'축구동호회1','test1','1234','<p><b>dfdfdfㅁㄴㅇ</b></p>',to_date('','RR/MM/DD'),4,null,'SoccerTest1');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (104,'브루마블 존잼','test20','1234','<p>브루마블 존잼</p>',to_date('','RR/MM/DD'),0,null,'boardGameClub');
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (108,'test','test1',null,'<p><b>test</b></p>',to_date('','RR/MM/DD'),1,'test1',null);
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (121,'qqq','test',null,'<p><b>qqq</b></p>',to_date('','RR/MM/DD'),1,'test1234',null);
+Insert into MOZLE.BOARD (B_NO,B_TITLE,B_WRITER,B_PWD,B_CONTENT,B_DATE,B_COUNT,B_ID,B_CLUBNAME) values (107,'test','test1',null,'<p><b>test</b></p>',to_date('','RR/MM/DD'),0,'test1',null);
+REM INSERTING into MOZLE.BOARDREPLY
+SET DEFINE OFF;
+Insert into MOZLE.BOARDREPLY (B_FONO,B_RENO,B_REWRITER,B_RECONTENT,B_REDATE) values (121,61,'test1234','eeee',to_date('','RR/MM/DD'));
+REM INSERTING into MOZLE.CLUB_MAIN
+SET DEFINE OFF;
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (65,'SoccerTest1','soccer','test1','test1,test2','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer1.jpg','<p><b>저희는 축구 동회회 1번입니다.</b></p>','저희는 축구 동회회 1번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer1.jpg','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (66,'SoccerTest2','soccer','test2','test2','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer3.jpg','<p><b>저희는 축구 동호회 2번입니다.</b></p>','저희는 축구 동호회 2번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer3.jpg','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (67,'SoccerTest3','soccer','test3','test3','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer4.jpg','<p><b>저희는 축구 동호회 2번입니다.</b></p><div><br></div>','저희는 축구 동호회 2번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer4.jpg','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (68,'SoccerTest4','soccer','test4','test4','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer5.jpg','<p><b>저희는 축구 동호회 4번입니다.</b></p>','저희는 축구 동호회 4번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer5.jpg','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (69,'SoccerTest5','soccer','test5','test5','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer6.jpg','<p><b>저희는 축구 동호회 5번입니다.</b></p>','저희는 축구 동호회 5번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer6.jpg','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (70,'SoccerTest6','soccer','test6','test6','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer2.jpg','<p><b>저희는 축구 동호회 6번입니다.</b></p>','저희는 축구 동호회 6번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer2.jpg','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (71,'SoccerTest7','soccer','test7','test7','/mozle/resources/mozle_data/club_mainimage/exercise/soccer/0soccer7.png','<p><b>저희는 축구 동호회 2번입니다.</b></p>','저희는 축구 동호회 7번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/soccer/0soccer7.png','강남구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (72,'baseTest1','baseball','test8','test8','/mozle/resources/mozle_data/club_mainimage/exercise/baseball/0bas1.jpg','<p><b>저희는 야구 동호회 1번입니다.</b></p>','저희는 야구 동호회 1번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/baseball/0bas1.jpg','강서구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (73,'basketTest1','basketball','test9','test9','/mozle/resources/mozle_data/club_mainimage/exercise/basketball/0bas2.jpg','<p><b>저희는 농구 동호회 1번입니다.</b></p>','저희는 농구 동호회 1번입니다.','/mozle/resources/mozle_data/club_thumnail/exercise/basketball/0bas2.jpg','강북구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (74,'vocal1','vocal','test10','test10','/mozle/resources/mozle_data/club_mainimage/music/vocal/0vocal.jpg','<b>보컬 동호회입니다.</b>','보컬 동호회입니다.','/mozle/resources/mozle_data/club_thumnail/music/vocal/0vocal2.jpg','광진구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (75,'pianoClub1','piano','test11','test11','/mozle/resources/mozle_data/club_mainimage/music/piano/0piano1.jpg','<p><b>피아노 동호회입니다.</b></p>','피아노 동호회입니다.','/mozle/resources/mozle_data/club_thumnail/music/piano/0piano2.jpg','강북구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (76,'guitar','guitar','test12','test12','/mozle/resources/mozle_data/club_mainimage/music/guitar/0gitar1.jpg','<p>기타 동호회입니다.</p>','기타 동호회입니다.','/mozle/resources/mozle_data/club_thumnail/music/guitar/0gitar1.jpg','관악구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (80,'calliClub1','calli','test14','test14','/mozle/resources/mozle_data/club_mainimage/handmade/calli/0calli3.jpg','<p><b>캘리그라피 동호회입니다.</b></p>','캘리그라피 동호회입니다.','/mozle/resources/mozle_data/club_thumnail/handmade/calli/0calli4.JPG','성동구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (78,'jasuClub','jasu','test13','test13','/mozle/resources/mozle_data/club_mainimage/handmade/jasu/0jasu2.jpg','<p><b>jasuClub입니다.</b></p>','jasuClub입니다.','/mozle/resources/mozle_data/club_thumnail/handmade/jasu/0jasu3.jpg','구로구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (82,'draft1','crafts','test15','test15','/mozle/resources/mozle_data/club_mainimage/handmade/crafts/0draft1.jpg','<p><b>소품공예입니다.</b></p>','소품공예입니다.','/mozle/resources/mozle_data/club_thumnail/handmade/crafts/0draft1.jpg','관악구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (84,'cat1','cat','test16','test16','/mozle/resources/mozle_data/club_mainimage/pet/cat/0cat1.jpg','<p><b>고양이 좋아해요!</b></p>','고양이 좋아해요!','/mozle/resources/mozle_data/club_thumnail/pet/cat/0cat1.jpg','강동구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (101,'dogClub','dog','test17','test17','/mozle/resources/mozle_data/club_mainimage/pet/dog/0dog2.jpg','<b>댕댕이 사랑 나라 사랑</b>','우리 이쁜 강아지보러오세요','/mozle/resources/mozle_data/club_thumnail/pet/dog/0dog3.jpg','관악구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (103,'dartClub','dart','test18','test18','/mozle/resources/mozle_data/club_mainimage/game/dart/0large_dart1.jpg','<p><b>우리 같이 다트하고 놀아요!</b></p>','우리 같이 다트하고 놀아요!','/mozle/resources/mozle_data/club_thumnail/game/dart/0small_dart.jpg','송파구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (106,'battlegroundClub','battle','test19','test19','/mozle/resources/mozle_data/club_mainimage/game/battle/0large_battle1.jpg','<p><b>배그합시다</b></p>','배그합시다','/mozle/resources/mozle_data/club_thumnail/game/battle/0small_battle.jpg','도봉구',null);
+Insert into MOZLE.CLUB_MAIN (C_NO,C_NAME,C_CATEGORY,C_LEADER_ID,C_MEMBER_ID,C_PICTURE,C_CONTENT,C_SUMMARY,C_THUMBNAIL,C_LOCATION,C_MEMBER_ID_READY) values (107,'boardGameClub','boardgame','test20','test20','/mozle/resources/mozle_data/club_mainimage/game/boardgame/0large_boardGame.jpg','<p><b>브루마블 존잼</b></p>','브루마블 존잼','/mozle/resources/mozle_data/club_thumnail/game/boardgame/0small_boardGame1.jpg','구로구',null);
+REM INSERTING into MOZLE.CLUB_NOTICE
+SET DEFINE OFF;
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (28,'SoccerTest3','저희는 축구 동호회 3번입니다.','test3','test3','<p><b>저희는 축구 동호회 3번입니다.</b></p><div><br></div>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (29,'SoccerTest7','저희는 축구 동호회 7번입니다.','test7','test7','<p><b>저희는 축구 동호회 7번입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (30,'SoccerTest6','저희는 축구 동호회 6번입니다.','test6','test6','<p><b>저희는 축구 동호회 6번입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (31,'SoccerTest5','저희는 축구 동호회 5번입니다.','test5','test5','<p><b>저희는 축구 동호회 5번입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (32,'SoccerTest4','저희는 축구 동호회 4번입니다.','test4','test4','<p><b>저희는 축구 동호회 4번입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (33,'guitar','기타 동호회입니다.','test12','test12','<p><b>기타 동호회입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (26,'SoccerTest1','축구동호회 1번 공지사항 입니다.','test1','test1','<b>!!축구동호회 1</b>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (27,'SoccerTest2','저희는 축구 동호회 2번입니다.','test2','test2','<p><b>저희는 축구 동호회 2번입니다.</b></p><div><br></div>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (34,'pianoClub1','피아노 동호회입니다.','test11','test11','<p>피아노 동호회입니다.</p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (35,'vocal1','보컬 동호회입니다.','test10','test10','<p><b>보컬 동호회입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (36,'jasuClub','jasuClub입니다.','test13','test13','<p><b>jasuClub입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (37,'calliClub1','캘리그라피 동호회입니다.','test14','test14','<p>캘리그라피 동호회입니다.</p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (38,'draft1','소품공예입니다.','test15','test15','<p>소품공예입니다.</p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (41,'dogClub','dogClub입니다.','test17','test17','<p><b>dogClub입니다.</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (42,'dartClub','우리 같이 다트하고 놀아요!','test18','test18','<p><b>우리 같이 다트하고 놀아요!</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (43,'battlegroundClub','나랑 배그 할 사람!','test19','test19','<p><b>나랑 배그 할 사람!</b></p>',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.CLUB_NOTICE (N_NO,N_CLUBNAME,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (44,'boardGameClub','브루마블 존잼','test20','test20','<p>브루마블 존잼</p>',to_date('','RR/MM/DD'),0);
+REM INSERTING into MOZLE.LEAVE_REASON
+SET DEFINE OFF;
+Insert into MOZLE.LEAVE_REASON (L_ID,L_REASON,L_DETAILREASON) values ('tt',2,'teste');
+Insert into MOZLE.LEAVE_REASON (L_ID,L_REASON,L_DETAILREASON) values ('tt',3,'tet');
+Insert into MOZLE.LEAVE_REASON (L_ID,L_REASON,L_DETAILREASON) values ('tt',1,'etete');
+Insert into MOZLE.LEAVE_REASON (L_ID,L_REASON,L_DETAILREASON) values ('tt',4,'te');
+REM INSERTING into MOZLE.MATCH
+SET DEFINE OFF;
+Insert into MOZLE.MATCH (MATCH_CODE,HOME_CODE,AWAY_CODE,AREA,FIELD,PAY,UNIFORM_COLOR,CONTENT,WRITE_DATE,GAME_TYPE,GAME_DATE,GAME_TIME,HOME_ID,DELFLAG,JIBUN) values ('M128',65,null,'성동구','경기장',10000,'빨간색','우리 같이 축구해요!',to_date('','RR/MM/DD'),'축구',to_date('','RR/MM/DD'),'13:00','test1','N',null);
+Insert into MOZLE.MATCH (MATCH_CODE,HOME_CODE,AWAY_CODE,AREA,FIELD,PAY,UNIFORM_COLOR,CONTENT,WRITE_DATE,GAME_TYPE,GAME_DATE,GAME_TIME,HOME_ID,DELFLAG,JIBUN) values ('M129',65,66,'종로구','인천문학경기장',10000,'빨강','1234',to_date('','RR/MM/DD'),'축구',to_date('','RR/MM/DD'),'6:00','test1','N','인천 미추홀구 문학동 482');
+REM INSERTING into MOZLE.MATCH_APPLY
+SET DEFINE OFF;
+Insert into MOZLE.MATCH_APPLY (MATCH_CODE,AWAY_CODE,CHOICE) values ('M129',66,'N');
+REM INSERTING into MOZLE.MATCH_REPLY
+SET DEFINE OFF;
+Insert into MOZLE.MATCH_REPLY (R_CODE,MATCH_CODE,M_ID,R_CONTENT,R_DATE,DELFALG) values ('R121','M129','test1234','test',to_date('','RR/MM/DD'),'Y');
+REM INSERTING into MOZLE.MEMBER
+SET DEFINE OFF;
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (1,'nayasky','1234','연제각','M','1995-07-24','010-1111-1111','ggkgk@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,null,'soccer,baseball,calli');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (0,'admin','admin','관리자','M','1984-05-07','010-2066-8457',' ABCD@NAVER.COM','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test서울',null,0,0,null,null);
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (101,'boram2','1234','안보람','F','1995-10-28','010-3081-7573','ifeelboram@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test','soccerTest',1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (2,'vlfxhs','1234','조하늘','M','1995-01-01','010-3333-1111','ghghgh@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test','soccerTest',1,0,null,'calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (3,'gksmf','1234','김현수','M','1995-08-12','010-4444-4444','gksmf@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,null,'soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (4,'john','1234','황인선','M','1995-05-15','010-3333-6666','ggkk@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,null,'calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (102,'test1','1234','test1','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (103,'test2','1234','test2','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (104,'test3','1234','test3','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (105,'test4','1234','test4','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (106,'test5','1234','test5','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (107,'test6','1234','test6','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (108,'test7','1234','test7','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (109,'test8','1234','test8','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (110,'test9','1234','test9','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (111,'test10','1234','test10','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (112,'test11','1234','test11','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (113,'test12','1234','test12','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (114,'test13','1234','test13','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (115,'test14','1234','test14','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (116,'test15','1234','test15','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (117,'test16','1234','test16','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (118,'test17','1234','test17','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (119,'test18','1234','test18','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (120,'test19','1234','test19','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (121,'test20','1234','test20','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (122,'test21','1234','test21','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (123,'test22','1234','test22','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (124,'test23','1234','test23','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (125,'test24','1234','test24','F','1995-10-28','010-3081-7573','test@naver.com','06267/서울 강남구 강남대로 238 (도곡동, 스카이쏠라빌딩)/test',null,1,0,'강동구,강북구,강서구','soccer,baseball,calli,vocal,piano');
+Insert into MOZLE.MEMBER (M_NO,M_ID,M_PWD,M_NAME,M_GENDER,M_BIRTH,M_PHONE,M_EMAIL,M_ADDRESS,M_CNAME,M_GRADE,M_CGRADE,M_LOCATION,M_TOPIC) values (126,'test1234','1234','test','F','2018-08-15','010-6666-8888','test@naver.com','06327/서울 강남구 삼성로 11 (개포동, 디에이치 아너힐즈(현장사무소))/test',null,1,0,'강동구','soccer');
+REM INSERTING into MOZLE.NOTICE
+SET DEFINE OFF;
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (1,'공지사항1','관리자','TESTPWD','첫번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (2,'공지사항2','관리자','TESTPWD','두번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (3,'공지사항3','관리자','TESTPWD','세번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (4,'공지사항4','관리자','TESTPWD','네번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (5,'공지사항5','관리자','TESTPWD','다섯번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (6,'공지사항6','관리자','TESTPWD','여섯번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (7,'공지사항7','관리자','TESTPWD','일곱번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (8,'공지사항8','관리자','TESTPWD','여덟번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (9,'공지사항9','관리자','TESTPWD','아홉번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (10,'공지사항10','관리자','TESTPWD','열번째 공지사항입니다.',to_date('','RR/MM/DD'),0);
+Insert into MOZLE.NOTICE (N_NO,N_TITLE,N_WRITER,N_PWD,N_CONTENT,N_DATE,N_COUNT) values (25,'test','관리자','test','<p><b>test</b></p>',to_date('','RR/MM/DD'),3);
+--------------------------------------------------------
+--  DDL for Index APPLY_CODE_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."APPLY_CODE_PK" ON "MOZLE"."MATCH_APPLY" ("MATCH_CODE", "AWAY_CODE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index MATCH_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."MATCH_PK" ON "MOZLE"."MATCH" ("MATCH_CODE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index MATCH_REPLY_PK
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."MATCH_REPLY_PK" ON "MOZLE"."MATCH_REPLY" ("R_CODE") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007169
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."SYS_C007169" ON "MOZLE"."MEMBER" ("M_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007174
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."SYS_C007174" ON "MOZLE"."CLUB_MAIN" ("C_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007178
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."SYS_C007178" ON "MOZLE"."NOTICE" ("N_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007182
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."SYS_C007182" ON "MOZLE"."BOARD" ("B_NO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  DDL for Index SYS_C007183
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "MOZLE"."SYS_C007183" ON "MOZLE"."BOARDREPLY" ("B_RENO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM" ;
+--------------------------------------------------------
+--  Constraints for Table BOARD
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."BOARD" ADD PRIMARY KEY ("B_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."BOARD" MODIFY ("B_WRITER" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table BOARDREPLY
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."BOARDREPLY" ADD PRIMARY KEY ("B_RENO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+--------------------------------------------------------
+--  Constraints for Table CLUB_MAIN
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."CLUB_MAIN" ADD PRIMARY KEY ("C_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."CLUB_MAIN" MODIFY ("C_LEADER_ID" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."CLUB_MAIN" MODIFY ("C_CATEGORY" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."CLUB_MAIN" MODIFY ("C_NAME" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MATCH
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MATCH" ADD CONSTRAINT "MATCH_PK" PRIMARY KEY ("MATCH_CODE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("GAME_DATE" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("GAME_TYPE" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("UNIFORM_COLOR" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("AREA" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("GAME_TIME" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH" MODIFY ("HOME_CODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MATCH_APPLY
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MATCH_APPLY" ADD CONSTRAINT "APPLY_CODE_PK" PRIMARY KEY ("MATCH_CODE", "AWAY_CODE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."MATCH_APPLY" MODIFY ("AWAY_CODE" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH_APPLY" MODIFY ("MATCH_CODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MATCH_REPLY
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MATCH_REPLY" ADD CONSTRAINT "MATCH_REPLY_PK" PRIMARY KEY ("R_CODE")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."MATCH_REPLY" MODIFY ("R_CONTENT" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH_REPLY" MODIFY ("M_ID" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MATCH_REPLY" MODIFY ("MATCH_CODE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table MEMBER
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MEMBER" ADD CHECK (M_GENDER IN ('M','F')) ENABLE;
+  ALTER TABLE "MOZLE"."MEMBER" ADD PRIMARY KEY ("M_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."MEMBER" ADD CHECK (M_GENDER IN ('M','F')) ENABLE;
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_GRADE" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_ADDRESS" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_EMAIL" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_PHONE" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_BIRTH" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_NAME" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_PWD" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."MEMBER" MODIFY ("M_ID" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Constraints for Table NOTICE
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."NOTICE" ADD PRIMARY KEY ("N_NO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1 BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "SYSTEM"  ENABLE;
+  ALTER TABLE "MOZLE"."NOTICE" MODIFY ("N_PWD" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."NOTICE" MODIFY ("N_WRITER" NOT NULL ENABLE);
+  ALTER TABLE "MOZLE"."NOTICE" MODIFY ("N_TITLE" NOT NULL ENABLE);
+--------------------------------------------------------
+--  Ref Constraints for Table BOARDREPLY
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."BOARDREPLY" ADD CONSTRAINT "FK_BOARDREPLY" FOREIGN KEY ("B_FONO")
+	  REFERENCES "MOZLE"."BOARD" ("B_NO") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MATCH
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MATCH" ADD CONSTRAINT "MATCH_ACODE_FK" FOREIGN KEY ("AWAY_CODE")
+	  REFERENCES "MOZLE"."CLUB_MAIN" ("C_NO") ENABLE;
+  ALTER TABLE "MOZLE"."MATCH" ADD CONSTRAINT "MATCH_HCODE_FK" FOREIGN KEY ("HOME_CODE")
+	  REFERENCES "MOZLE"."CLUB_MAIN" ("C_NO") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MATCH_APPLY
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MATCH_APPLY" ADD CONSTRAINT "MATCH_CODE_FK" FOREIGN KEY ("MATCH_CODE")
+	  REFERENCES "MOZLE"."MATCH" ("MATCH_CODE") ENABLE;
+--------------------------------------------------------
+--  Ref Constraints for Table MATCH_REPLY
+--------------------------------------------------------
+
+  ALTER TABLE "MOZLE"."MATCH_REPLY" ADD CONSTRAINT "MREPLY_MCODE_FK" FOREIGN KEY ("MATCH_CODE")
+	  REFERENCES "MOZLE"."MATCH" ("MATCH_CODE") ENABLE;

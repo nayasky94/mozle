@@ -1,0 +1,50 @@
+<?xml version= "1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adminMapper">
+   
+      <select id="joinedMemberCount" resultType="int">
+      SELECT COUNT(M_NO) FROM MEMBER
+   </select>
+   
+   <select id="memberList" resultType="Member">
+      SELECT M_NO, M_ID, M_PWD, M_NAME, M_GENDER, M_BIRTH, M_PHONE, M_EMAIL, M_ADDRESS, M_CNAME, M_GRADE, M_CGRADE, M_LOCATION, M_TOPIC 
+      FROM MEMBER WHERE M_NO > 0
+   </select>
+   
+   <select id="countVisitor" resultType="int">
+      SELECT COUNTVISITOR FROM ADMIN
+   </select>
+   
+   <update id="plusCountVisitor">
+      UPDATE ADMIN SET COUNTVISITOR = COUNTVISITOR + 1
+      WHERE NUMKEY = 1
+   </update>
+   
+   <select id="memberSelectOne" resultType="Member">
+      SELECT M_NO, M_ID, M_PWD, M_NAME, M_GENDER, M_BIRTH, M_PHONE, M_EMAIL, M_ADDRESS, M_CNAME, M_GRADE, M_CGRADE, M_LOCATION, M_TOPIC 
+      FROM MEMBER WHERE M_NO = #{no}
+   </select>
+   
+   <update id="memberUpdateOne">
+      UPDATE MEMBER SET 
+      M_NO=#{m_no}, M_ID=#{m_id}, M_PWD=#{m_pwd}, M_NAME=#{m_name}, 
+      M_GENDER=#{m_gender}, M_BIRTH=#{m_birth}, M_PHONE=#{m_phone}, 
+      M_EMAIL=#{m_email}, M_ADDRESS=#{m_address}, M_CNAME=#{m_cname}, 
+      M_GRADE=#{m_grade}, M_CGRADE=#{m_cgrade}, M_LOCATION=#{m_location}, 
+      M_TOPIC=#{m_topic}
+      WHERE M_NO = #{no}
+   </update>
+   
+   <delete id="adminMemberDelete">
+   DELETE FROM MEMBER WHERE M_NO = #{no}
+   </delete>
+   
+   <select id="clubData" resultType="ClubMain">
+      SELECT C_NAME, C_CATEGORY, C_LEADER_ID, C_MEMBER_ID, C_LOCATION
+      FROM CLUB_MAIN 
+      
+   </select>
+   
+</mapper>

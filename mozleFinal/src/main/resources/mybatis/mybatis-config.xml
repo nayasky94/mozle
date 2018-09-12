@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.kh.mozle.member.model.vo.Member" alias="Member"/> 
+		<typeAlias type="com.kh.mozle.club.model.vo.ClubMain" alias="ClubMain"/>
+		<typeAlias type="com.kh.mozle.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.mozle.board.model.vo.Board" alias="Board"/>
+		<typeAlias type="com.kh.mozle.clubNotice.model.vo.ClubNotice" alias="ClubNotice"/>
+		<typeAlias type="com.kh.mozle.board.model.vo.BoardReply" alias="BoardReply"/>
+		<typeAlias type="com.kh.mozle.leaveReason.model.vo.LeaveReason" alias="Reason"/>
+		<typeAlias type="com.kh.mozle.match.model.vo.MatchApply" alias="MatchApply"/>
+		<typeAlias type="com.kh.mozle.match.model.vo.MatchReply" alias="MatchReply"/>
+		<typeAlias type="com.kh.mozle.match.model.vo.Match" alias="Match"/>
+		<typeAlias type="com.kh.mozle.admin.model.vo.Admin" alias="Admin"/>
+		
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mybatis/sql/memberMapper.xml" />
+		<mapper resource="mybatis/sql/clubMapper.xml" />
+		<mapper resource="mybatis/sql/noticeMapper.xml" />
+		<mapper resource="mybatis/sql/boardMapper.xml" />
+		<mapper resource="mybatis/sql/clubNoticeMapper.xml" />
+		<mapper resource="mybatis/sql/boardReplyMapper.xml"/>
+		<mapper resource="mybatis/sql/reasonMapper.xml"/>
+		<mapper resource="mybatis/sql/matchMapper.xml"/>
+		<mapper resource="mybatis/sql/adminMapper.xml" />
+	</mappers>
+</configuration>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

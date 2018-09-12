@@ -1,0 +1,45 @@
+<?xml version= "1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="replyMapper">
+	<resultMap type="BoardReply" id="ReplyMap">
+		<id property="b_reNo" column="B_RENO"/>
+		<result property="b_foNo" column="B_FONO"/>
+		<result property="b_reWriter" column="B_REWRITER"/>
+		<result property="b_reContent" column="B_RECONTENT"/>
+		<result property="b_reDate" column="B_REDATE"/>
+	</resultMap>
+	
+	
+	<select id="selectReplyList" resultType="BoardReply">
+		SELECT B_FONO, B_RENO, B_REWRITER, B_RECONTENT, B_REDATE FROM BOARDREPLY 
+		WHERE B_FONO = #{no}
+		ORDER BY B_FONO ASC, B_RENO ASC 
+	</select>
+	
+	<insert id="insertReply" parameterType="BoardReply">
+	INSERT INTO BOARDREPLY VALUES(#{b_foNo}, SEQ_B_RENO.NEXTVAL, #{b_reWriter}, #{b_reContent}, SYSDATE)
+	</insert>
+	
+	<delete id="deleteReply" parameterType="BoardReply">
+	DELETE FROM BOARDREPLY
+	WHERE B_FONO = #{b_foNo} and B_RENO =#{b_reNo}
+	</delete>
+	
+	<select id="replyCount" resultType="int">
+	SELECT COUNT(*) FROM BOARDREPLY
+	WHERE B_FONO = #{no}
+	</select>
+	
+	<select id="deleteAllReply" parameterType="BoardReply">
+	DELETE FROM BOARDREPLY
+	WHERE B_FONO = #{no}
+	</select>
+	
+	<select id="selectMyReplyList" parameterType="Member" resultType="BoardReply">
+	SELECT B_FONO, B_RECONTENT, B_REDATE
+	FROM BOARDREPLY R, MEMBER M 
+	WHERE M.M_ID = #{m_id}
+	</select>
+</mapper>
